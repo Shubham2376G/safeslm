@@ -4,7 +4,7 @@
 
 ---
 
-## Motivation
+## 🚀 Motivation
 
 Small language models, because they contain far fewer parameters, tend to memorize less context. This makes them more **vulnerable to simple prompt-based jailbreaks**. Large language models, on the other hand, have more weights and capacity, which allows them to:
 
@@ -18,38 +18,38 @@ However, SLMs perform best when focused on a **single task**. Forcing an SLM to 
 
 * Keep tasks separate by training small models specifically for **safety detection**.
 * For a given task, the model considers **all related prompts safe** and others unsafe.
-* LoRA adapters allow fine-tuning safety behavior **without modifying the base model**, preserving the original weights.
+* LoRA adapters allow fine-tuning safety behavior **without modifying the base model**, preserving the performance of model
 
 ---
 
-## Features
+## ✨ Key Features
 
-* Fine-tune small language models on safety datasets using **LoRA adapters**
-* Simple class-based Python API for training and inference
-* CLI for reproducible training and inference pipelines
-* Supports multiple adapters for the same base model
-* Keeps tasks separate to avoid degrading reasoning or other capabilities
-* Flexible precision: full, 8-bit, or 4-bit
-* Supports custom HuggingFace datasets
-* Task-specific inference with a `task` argument
+* 🔐Fine-tune small language models (GPT, LLaMA, Qwen, Gemma, etc.) on safety datasets using **LoRA adapters**
+* 🧠 **Task-aware inference** with safety control per domain (`default`, `coding`, `content_creation`, `education`, etc.)
+* 🧩 **Multiple Adapter Support:** Easily switch between different safety adapters on the same base model
+* ⚙️ Supports **custom HuggingFace datasets** for domain-specific safety fine-tuning
+* 🪶 Flexible precision modes — `full`, `8bit`, or `4bit` for efficient deployment
+* 🧰 Simple, unified **Python API** and **CLI** for training and inference
+* 🔄 Seamless integration with **semantic-router** for prompt routing and embedding-based safety checks
 
 ---
 
-## Installation
+## 🧩 Installation
 
 ```bash
-# First install semantic-router for routing functionality
-!pip install -qU "semantic-router[fastembed]==0.1.0"
+# Install routing dependency
+pip install -qU "semantic-router[fastembed]==0.1.0"
 
 # Install SafeSLM
 pip install safeslm
 ```
 
-> **Note:** If you are on Google Colab, restart your session after installation.
+> **Note:** Restart your environment (if on Colab) after installation.
 
 ---
 
-## Usage
+## 🧠 Usage
+
 
 ### Python API
 
@@ -90,7 +90,7 @@ safeslm infer --model gpt2 --adapter ./adapter_out/lora_adapter --prompt "What a
 
 ---
 
-## Multi-Adapter Support
+## 🔄 Multi-Adapter Workflow
 
 You can train multiple LoRA adapters on different safety datasets or domains and switch between them without reloading the base model:
 
@@ -102,19 +102,19 @@ adapter_a = SafeSLM("gpt2", adapter_path="./adapters/safety_v1/lora_adapter")
 adapter_b = SafeSLM("gpt2", adapter_path="./adapters/safety_v2/lora_adapter")
 
 # Run inference on both
-print(adapter_a("Some potentially unsafe prompt", task="safety"))
-print(adapter_b("Some potentially unsafe prompt", task="safety"))
+print(adapter_a("Some potentially unsafe prompt", task="coding"))
+print(adapter_b("Some potentially unsafe prompt", task="coding"))
 ```
 
 ---
 
-## Pipeline Overview
+## 🧬 Pipeline Overview
 
 The SafeSLM pipeline consists of:
 
-1. **Base Model Loading** – Load the HuggingFace model in desired precision.
-2. **Optional LoRA Adapter** – Fine-tuned weights for safety, loaded separately.
-3. **Router & Encoder** – Encodes prompts for safety classification or routing.
+1. **Base Model Loader:** Loads supported models (GPT, LLaMA, Qwen, Gemma, etc.) in the chosen precision.
+2. **LoRA Adapter Injector:** Injects fine-tuned adapters for safety control without altering core weights.
+3. **Semantic Router & Encoder:** Routes prompts and encodes embeddings for safety classification.
 4. **Pipeline Execution** – Handles prompt routing, LoRA injection, and generation.
 
 <div style="background-color: white; display: inline-block;">
@@ -123,24 +123,32 @@ The SafeSLM pipeline consists of:
 
 ---
 
-## Why SafeSLM?
 
-* **Task separation** ensures small models remain accurate for their intended purpose.
-* **LoRA adapters** allow multiple safety profiles on the same base model.
-* **Easy integration** via class-based API or CLI.
-* **Supports multiple precisions** for faster inference on limited hardware.
-* **Supports custom datasets** for training on your own data.
-* **Task-aware inference** using the `task` argument.
+
+---
+## 💡 Why SafeSLM?
+
+| Problem                                 | SafeSLM Solution                                           |
+| --------------------------------------- | ---------------------------------------------------------- |
+| SLMs are easy to jailbreak              | Fine-tunes on safety data for domain-specific resistance   |
+| Adding safety degrades reasoning        | Separates tasks via adapters to maintain core capabilities |
+| Hard to manage multiple safety profiles | Load multiple LoRA adapters dynamically                    |
+| Limited compute for training            | Supports low-bit quantization for fast, efficient runs     |
+| Custom datasets needed                  | Directly supports any HuggingFace dataset                  |
 
 ---
 
-## Contributing
+## 🧑‍💻 Contributing
 
 Contributions are welcome! Please submit issues or pull requests.
 For major changes, open a discussion first.
 
 ---
 
-## License
+## 📜 License
 
-[MIT License](LICENSE)
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+> **SafeSLM** — Bringing **modular safety** to small language models without compromising performance.

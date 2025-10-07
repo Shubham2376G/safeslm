@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "safeslm"
-version = "0.1.0"
+version = "0.1.1"
 description = "SafesLM — safe LLM routing with LoRA adapters"
 readme = "README.md"
 license = { text = "MIT" }
