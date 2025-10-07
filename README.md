@@ -74,7 +74,7 @@ safe_model = SafeSLM(
 )
 
 # Run prompts with a task (currently supports:"default","coding","content_creation","education",)
-output = safe_model("Is it safe to share my password online?", task="default")
+output = safe_model("Create a blog post on RAG?", task="content_creation")
 print(output)
 ```
 
