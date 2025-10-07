@@ -117,9 +117,8 @@ The SafeSLM pipeline consists of:
 3. **Semantic Router & Encoder:** Routes prompts and encodes embeddings for safety classification.
 4. **Pipeline Execution** – Handles prompt routing, LoRA injection, and generation.
 
-<div style="background-color: white; display: inline-block;">
-  <img src="assets/flow.png" alt="Flowchart">
-</div>
+![Flowchart](assets/flow.png)
+
 
 ---
 
